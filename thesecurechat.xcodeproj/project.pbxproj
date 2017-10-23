@@ -14,6 +14,7 @@
 		030B18201F9AE5F500B2F62E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */; };
 		030B182B1F9AE5F500B2F62E /* thesecurechatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B182A1F9AE5F500B2F62E /* thesecurechatTests.swift */; };
 		030B18361F9AE5F500B2F62E /* thesecurechatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */; };
+		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,8 @@
 		030B18311F9AE5F500B2F62E /* thesecurechatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thesecurechatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thesecurechatUITests.swift; sourceTree = "<group>"; };
 		030B18371F9AE5F500B2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0335E8961F9C2D7700F37304 /* thesecurechat-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Swift.h"; sourceTree = "<group>"; };
+		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0335E8991F9C305300F37304 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +85,7 @@
 				030B18291F9AE5F500B2F62E /* thesecurechatTests */,
 				030B18341F9AE5F500B2F62E /* thesecurechatUITests */,
 				030B18131F9AE5F500B2F62E /* Products */,
+				0335E8971F9C304800F37304 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
+				0335E8961F9C2D7700F37304 /* thesecurechat-Swift.h */,
 				030B18171F9AE5F500B2F62E /* ViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
@@ -123,6 +129,14 @@
 				030B18371F9AE5F500B2F62E /* Info.plist */,
 			);
 			path = thesecurechatUITests;
+			sourceTree = "<group>";
+		};
+		0335E8971F9C304800F37304 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0335E8981F9C304800F37304 /* Security.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,6 +457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WPB72M7ZKJ;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = thesecurechat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thesecurechat;
