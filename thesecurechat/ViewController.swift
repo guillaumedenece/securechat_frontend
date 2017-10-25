@@ -9,8 +9,94 @@
 import UIKit
 //import Security.framework
 
+extension String {
+    
+    func aesEncrypt(key:String, iv:String, options:Int = kCCOptionPKCS7Padding) -> String? {
+        if let keyData = key.data(using: String.Encoding.utf8),
+            let data = self.data(using: String.Encoding.utf8),
+            let cryptData    = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
+            
+            
+            let keyLength              = size_t(kCCKeySizeAES128)
+            let operation: CCOperation = UInt32(kCCEncrypt)
+            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
+            let options:   CCOptions   = UInt32(options)
+            
+            
+            
+            var numBytesEncrypted :size_t = 0
+            
+            let cryptStatus = keyData.withUnsafeBytes { keyDataBytes in
+                                data.withUnsafeBytes { dataBytes in
+                            CCCrypt(operation,
+                                      algoritm,
+                                      options,
+                                      keyDataBytes,
+                                      keyLength,
+                                      iv,
+                                      dataBytes,
+                                      data.count,
+                                      cryptData.mutableBytes,
+                                      cryptData.length,
+                                      &numBytesEncrypted)
+                            }}
+            
+            if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+                cryptData.length = Int(numBytesEncrypted)
+                let base64cryptString = cryptData.base64EncodedString(options: [])
+                return base64cryptString
+            }
+            else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    func aesDecrypt(key:String, iv:String, options:Int = kCCOptionPKCS7Padding) -> String? {
+        if let keyData = key.data(using: String.Encoding.utf8),
+            let data = NSData(base64Encoded: self, options: .ignoreUnknownCharacters),
+            let cryptData    = NSMutableData(length: Int((data.length)) + kCCBlockSizeAES128) {
+            
+            let keyLength              = size_t(kCCKeySizeAES128)
+            let operation: CCOperation = UInt32(kCCDecrypt)
+            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
+            let options:   CCOptions   = UInt32(options)
+            
+            var numBytesEncrypted :size_t = 0
+            
+            let cryptStatus = keyData.withUnsafeBytes { keyDataBytes in
+                            CCCrypt(operation,
+                                      algoritm,
+                                      options,
+                                      keyDataBytes,
+                                      keyLength,
+                                      iv,
+                                      data.bytes,
+                                      data.length,
+                                      cryptData.mutableBytes,
+                                      cryptData.length,
+                                      &numBytesEncrypted)
+                            }
+            
+            if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+                cryptData.length = Int(numBytesEncrypted)
+                let unencryptedMessage = String(data: cryptData as Data, encoding:String.Encoding.utf8)
+                return unencryptedMessage
+            }
+            else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    
+}
+
 class ViewController: UIViewController, UITextFieldDelegate  {
 
+    
     // MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var encryptedLabel: UILabel!
@@ -30,6 +116,10 @@ class ViewController: UIViewController, UITextFieldDelegate  {
         
         return true
     }
+    
+    
+
+        
     
     // Generate a private key
     func generate_privateKey() -> SecKey?{
@@ -75,6 +165,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
                 if (textField.text == nil) {
                     textField.text = "Default Text"
                 }
+                
                 let cipher_text: Data = encrypter(plain_text: textField.text!, public_key: publicKey!)!
                 encryptedLabel.text = cipher_text.base64EncodedString()
                 decryptedLabel.text = decrypter(cipher_text: cipher_text, private_key: privateKey!)
@@ -242,6 +333,8 @@ class ViewController: UIViewController, UITextFieldDelegate  {
     */
     
     // MARK: MyCode
+    
+
     func encrypter(plain_text: String, public_key: SecKey) -> Data? {
         let key_size: Int = 128;
         let block_size = 256;

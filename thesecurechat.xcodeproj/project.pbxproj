@@ -48,8 +48,8 @@
 		030B18311F9AE5F500B2F62E /* thesecurechatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thesecurechatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thesecurechatUITests.swift; sourceTree = "<group>"; };
 		030B18371F9AE5F500B2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0335E8961F9C2D7700F37304 /* thesecurechat-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Swift.h"; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +81,7 @@
 		030B18091F9AE5F500B2F62E = {
 			isa = PBXGroup;
 			children = (
+				034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */,
 				030B18141F9AE5F500B2F62E /* thesecurechat */,
 				030B18291F9AE5F500B2F62E /* thesecurechatTests */,
 				030B18341F9AE5F500B2F62E /* thesecurechatUITests */,
@@ -103,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
-				0335E8961F9C2D7700F37304 /* thesecurechat-Swift.h */,
 				030B18171F9AE5F500B2F62E /* ViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
@@ -446,6 +446,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thesecurechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SWIFT_MODULE_NAME)-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,6 +464,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thesecurechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SWIFT_MODULE_NAME)-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
