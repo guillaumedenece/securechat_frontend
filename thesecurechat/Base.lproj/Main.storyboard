@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="f0A-jv-AOS">
-                                <rect key="frame" x="16" y="40" width="288" height="311.5"/>
+                                <rect key="frame" x="16" y="40" width="288" height="391"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write something" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WSH-fu-L23">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="30"/>
@@ -34,19 +34,22 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03o-Ab-g7W">
-                                        <rect key="frame" x="0.0" y="66.5" width="4.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="288" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="OO0-Nd-Q8l"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your decrypted message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XA-tm-cZt">
-                                        <rect key="frame" x="0.0" y="95" width="195.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="174.5" width="195.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiQ-vg-QTU">
-                                        <rect key="frame" x="0.0" y="123.5" width="288" height="150"/>
+                                        <rect key="frame" x="0.0" y="203" width="288" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="C6M-L3-vmu"/>
                                         </constraints>
@@ -55,7 +58,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUH-Vd-whG">
-                                        <rect key="frame" x="0.0" y="281.5" width="46" height="30"/>
+                                        <rect key="frame" x="0.0" y="361" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zex-L8-KQi"/>
@@ -63,6 +66,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="03o-Ab-g7W" secondAttribute="trailing" id="Azy-uE-Bt5"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="eiQ-vg-QTU" secondAttribute="trailing" id="Bla-w2-RXg"/>
                                     <constraint firstAttribute="trailing" secondItem="WSH-fu-L23" secondAttribute="trailing" id="q8z-Is-3Wo"/>
                                 </constraints>
