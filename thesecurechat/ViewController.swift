@@ -15,20 +15,17 @@ extension String {
         if let keyData = key.data(using: String.Encoding.utf8),
             let data = self.data(using: String.Encoding.utf8),
             let cryptData    = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
-            
-            
+        
             let keyLength              = size_t(kCCKeySizeAES128)
             let operation: CCOperation = UInt32(kCCEncrypt)
             let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
             let options:   CCOptions   = UInt32(options)
             
-            
-            
             var numBytesEncrypted :size_t = 0
             
             let cryptStatus = keyData.withUnsafeBytes { keyDataBytes in
                                 data.withUnsafeBytes { dataBytes in
-                            CCCrypt(operation,
+                            CCCrypt(  operation,
                                       algoritm,
                                       options,
                                       keyDataBytes,
@@ -91,6 +88,30 @@ extension String {
         return nil
     }
     
+    func hmac(key: String) -> String {
+        let str = self.cString(using: String.Encoding.utf8)
+        let strLen = Int(self.lengthOfBytes(using: String.Encoding.utf8))
+        let digestLen = CC_SHA256_DIGEST_LENGTH
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: Int(digestLen))
+        let keyStr = key.cString(using: String.Encoding.utf8)
+        let keyLen = Int(key.lengthOfBytes(using: String.Encoding.utf8))
+        
+        CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA256), keyStr!, keyLen, str!, strLen, result)
+        
+        let digest = stringFromResult(result: result, length: Int(digestLen))
+        
+        result.deallocate(capacity: Int(digestLen))
+        
+        return digest
+    }
+    
+    private func stringFromResult(result: UnsafeMutablePointer<CUnsignedChar>, length: Int) -> String {
+        let hash = NSMutableString()
+        for i in 0..<length {
+            hash.appendFormat("%02x", result[i])
+        }
+        return String(hash)
+    }
     
 }
 
@@ -123,13 +144,15 @@ class ViewController: UIViewController, UITextFieldDelegate  {
     
     // Generate a private key
     func generate_privateKey() -> SecKey?{
-        let tag = "mykey".data(using: .utf8)!
+        
         let attributes: [String: Any] =
             [kSecAttrKeyType as String:            kSecAttrKeyTypeRSA,  //kSecAttrKeyTypeECSECPrimeRandom,
              kSecAttrKeySizeInBits as String:      2048,                //256,
+            //[kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+             //kSecAttrKeySizeInBits as String:      256,
              kSecPrivateKeyAttrs as String:
                 [kSecAttrIsPermanent as String:    true,
-                 kSecAttrApplicationTag as String: tag]
+                 kSecAttrApplicationTag as String: "mykey".data(using: .utf8)!]
         ]
         
         var error: Unmanaged<CFError>?
@@ -150,6 +173,9 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             if(privateKey != nil) {
                 
                 let publicKey = SecKeyCopyPublicKey(privateKey!);
+                
+                print("block size priv: ", SecKeyGetBlockSize(privateKey!))
+                print("block size priv: ", SecKeyGetBlockSize(publicKey!))
        
                 var error:Unmanaged<CFError>?
                 if let cfdata = SecKeyCopyExternalRepresentation(privateKey!, &error) {
@@ -166,9 +192,24 @@ class ViewController: UIViewController, UITextFieldDelegate  {
                     textField.text = "Default Text"
                 }
                 
-                let cipher_text: Data = encrypter(plain_text: textField.text!, public_key: publicKey!)!
-                encryptedLabel.text = cipher_text.base64EncodedString()
-                decryptedLabel.text = decrypter(cipher_text: cipher_text, private_key: privateKey!)
+                
+                var cipher_text: Data? = nil;
+                
+                do {
+                     try cipher_text = encrypter(plain_text: textField.text!, public_key: publicKey!)!
+                }
+                catch {
+                    print("Error \(error)")
+                }
+                
+                encryptedLabel.text = cipher_text?.base64EncodedString()
+                
+                do {
+                    try decryptedLabel.text = decrypter(cypher_text: cipher_text!, private_key: privateKey!)
+                }
+                catch {
+                    print("Error \(error)")
+                }
             }
     }
     
@@ -275,32 +316,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
     
     // MARK: TEST1
     
-    func decrypter(cipher_text: Data, private_key: SecKey) -> String? {
-        
-        let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA512
-        
-        guard SecKeyIsAlgorithmSupported(private_key, .decrypt, algorithm) else {
-            print("Problem with the private_key")
-            return nil
-        }
 
-        guard (cipher_text.count == SecKeyGetBlockSize(private_key)) else {
-            print("Problem with the length of the cipher text (different from private key)")
-            return nil
-        }
-        
-        var error: Unmanaged<CFError>?
-        guard let clearText = SecKeyCreateDecryptedData(private_key,
-                                                        algorithm,
-                                                        cipher_text as CFData,
-                                                        &error) as Data? else {
-                                                            print("Problem with the decryption")
-                                                            return nil
-        }
-        
-        return String(data: clearText, encoding: String.Encoding.utf8) as String!
-    }
-    
     /*
     Use OpenSSL command line prompts to generate 2048-bit RSA public/private key pairs (ECC is bonus).
     
@@ -335,48 +351,39 @@ class ViewController: UIViewController, UITextFieldDelegate  {
     // MARK: MyCode
     
 
-    func encrypter(plain_text: String, public_key: SecKey) -> Data? {
-        let key_size: Int = 128;
-        let block_size = 256;
+    func encrypter(plain_text: String, public_key: SecKey) throws -> Data? {
+        let key_size: Int = 256/8;
+        let block_size = 2048;
         
         var error: Int32 = 0;
-        var key_aes:Data;
-        var key_hmac:Data;
+        var key_aes = Data(count: key_size);
+        var str_key_aes:String;
+        var key_hmac = Data(count: key_size);
+        var str_key_hmac:String;
         var initialization_vector:Data;
         
         
-        let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA512
-        
-        guard SecKeyIsAlgorithmSupported(public_key, .encrypt, algorithm) else {
-            print("Problem with the public_key")
-            return nil
-        }
-        
-        guard (plain_text.count < (SecKeyGetBlockSize(public_key)-130)) else {
-            print("Problem with the length of the plain text (too loong)")
-            return nil
-        }
-        
-        var errorEncrypt: Unmanaged<CFError>?
-        guard let cipher_text = SecKeyCreateEncryptedData(public_key,
-                                                         algorithm,
-                                                         plain_text.data(using: String.Encoding.utf8)! as CFData,
-                                                         &errorEncrypt) as Data? else {
-                                                            print("Problem with the encryption")
-                                                            return nil
-        }
-        
-        // Generation of a random key
-        key_aes = Data(count: key_size)
+        // Generation of a random key for AES
         error = key_aes.withUnsafeMutableBytes {
             (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
             SecRandomCopyBytes(kSecRandomDefault, key_aes.count, mutableBytes)
         }
+        //let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) //
         
+        print("error: ", error)
         if error != errSecSuccess {
             print("Problem generating random bytes")
             return nil
         }
+        
+
+       
+        str_key_aes = key_aes.base64EncodedString(options: [])
+        //str_key_aes = init?(data: key_aes, encoding: String.Encoding.utf8)
+        //str_key_aes = key_aes.string(as: String.Encoding.utf8)!
+        print("STRING AES: ", str_key_aes)
+        //print("String lenght: ", str_key_aes.count)
+        //print("key size: ", key_aes.count)
         
         // Generation of IV
         initialization_vector = Data(count: block_size)
@@ -391,14 +398,219 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             return nil
         }
         
-        // Cypher Text
+        let str_initialization_vector = initialization_vector.base64EncodedString(options: [])
+        //nsdataStr = NSData.init(data: initialization_vector)
+        //let str_initialization_vector = nsdataStr.description.trimmingCharacters(in: CharacterSet.alphanumerics).replacingOccurrences(of: " ", with: "")
+        print("STR_IV: ", str_initialization_vector)
+        
+        // Cypher Text with AES
+        let cypher_text = plain_text.aesEncrypt(key: str_key_aes, iv: str_initialization_vector, options: kCCOptionPKCS7Padding + kCCModeCBC)
+        
+        /*
+    
+            let cypher_text    = NSMutableData(length: Int((plain_text.count)) + kCCBlockSizeAES128)
+
+        
+            var numBytesEncrypted :size_t = 0
+        
+            let cryptStatus = key_aes.withUnsafeBytes { keyDataBytes in
+                initialization_vector.withUnsafeBytes { ivDataBytes in
+                    CCCrypt(  UInt32(kCCEncrypt),
+                              UInt32(kCCAlgorithmAES128),
+                              UInt32(kCCOptionPKCS7Padding + kCCModeCBC),
+                              keyDataBytes,
+                              kCCKeySizeAES256,
+                              ivDataBytes,
+                              plain_text,
+                              plain_text.count,
+                              cypher_text!.mutableBytes,
+                              cypher_text!.length,
+                              &numBytesEncrypted)
+                }}
+            
+            if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+                cypher_text?.length = Int(numBytesEncrypted)
+                //let base64cryptString = cypher_text?.base64EncodedString(options: [])
+                //return base64cryptString
+            }
+            else {
+                return nil
+            }*/
+        print("CYPHERTEXT:", cypher_text)
         
         
+        // Generation of a random key for HMAC
+        error = key_hmac.withUnsafeMutableBytes {
+            (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
+            SecRandomCopyBytes(kSecRandomDefault, key_hmac.count, mutableBytes)
+        }
         
-        print("key_aes: ", key_aes.base64EncodedString())
-        print("IV     : ", initialization_vector.base64EncodedString())
+        if error != errSecSuccess {
+            print("Problem generating random bytes")
+            return nil
+        }
         
-        return cipher_text
+        str_key_hmac = key_hmac.base64EncodedString(options: [])
+        //nsdataStr = NSData.init(data: key_hmac)
+        //str_key_hmac = nsdataStr.description.trimmingCharacters(in: CharacterSet.alphanumerics).replacingOccurrences(of: " ", with: "")
+        
+        // Tag with HMAC
+        let tag = cypher_text?.hmac(key: str_key_hmac)
+        //let tag = cypher_text?.hmac(key: str_key_hmac)
+        print("TAG:", tag)
+        
+        // Concatenate keys
+        print("key_hmac: ", str_key_hmac)
+        print("key_aes: ", str_key_aes)
+        let key_conca = str_key_hmac + str_key_aes
+        //let key_conca = "VOICI_LA_CLEF_CONCA"
+            //"012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+            //str_key_hmac + str_key_aes
+        
+        print("key conca: ", key_conca)
+        
+        print("the lengths")
+        print("hmac: ", key_hmac)
+        print("aes: ", key_aes)
+        print("conca: ", key_conca.count)
+        
+        // RSA
+        let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA512
+        
+        guard SecKeyIsAlgorithmSupported(public_key, .encrypt, algorithm) else {
+            print("Problem with the public_key")
+            return nil
+        }
+        
+        /*
+        guard (plain_text.count < (SecKeyGetBlockSize(public_key)-130)) else {
+            print("Problem with the length of the plain text (too loong)")
+            return nil
+        }
+        */
+        
+        var errorEncrypt: Unmanaged<CFError>?
+        guard let cypher_key = SecKeyCreateEncryptedData(public_key,
+                                                          algorithm,
+                                                          key_conca.data(using: String.Encoding.utf8)! as CFData,
+                                                          &errorEncrypt) as Data? else {
+                                                            throw errorEncrypt!.takeRetainedValue() as Error
+        }
+        //nsdataStr = NSData.init(data: cypher_key)
+        //let str_cypher_key = nsdataStr.description.trimmingCharacters(in: CharacterSet.alphanumerics).replacingOccurrences(of: " ", with: "")
+        let str_cypher_key = cypher_key.base64EncodedString(options: [])
+        
+        // Create a JSON
+        print(cypher_text)
+        print(tag)
+        
+        let output_packet = OutputPacket(cypher_text: cypher_text!,
+                                         cypher_key: str_cypher_key,
+                                         iv: str_initialization_vector,
+                                         tag: tag!)
+        
+        let encoder = JSONEncoder()
+        
+        let outputJson = try! encoder.encode(output_packet)
+        
+        
+        //print(String(data: outputJson, encoding: .utf8)!)
+
+        
+        return outputJson
     }
+    
+    
+    func decrypter(cypher_text: Data, private_key: SecKey) throws -> String? {
+        
+        // Retrieve the Json object
+        let decoder = JSONDecoder()
+        let inputJson = try! decoder.decode(OutputPacket.self, from: cypher_text)
+
+        //print("JSON:", String(data: cypher_text, encoding: .utf8)!)
+        
+        // Get the two keys encrypted by RSA
+        let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA512
+        
+        guard SecKeyIsAlgorithmSupported(private_key, .decrypt, algorithm) else {
+            print("Problem with the private_key")
+            return nil
+        }
+        
+        /*
+        guard ((inputJson.cypher_key.data(using: String.Encoding.utf8)! as Data).count == SecKeyGetBlockSize(private_key)) else {
+            print("Problem with the length of the cypher key (different from private key)")
+            return nil
+        }*/
+        
+        //Data cypher_keyData = inputJson.cypher_key.
+        let data = NSData(base64Encoded: inputJson.cypher_key, options: .ignoreUnknownCharacters)
+        
+        var error: Unmanaged<CFError>?
+        guard let key_conca_data = SecKeyCreateDecryptedData(private_key,
+                                                        algorithm,
+                                                        data!,
+                                                        //inputJson.cypher_key.data(using: String.Encoding.utf8)! as CFData,
+                                                        &error) as Data? else {
+                                                                throw error!.takeRetainedValue() as Error
+        }
+        
+        let key_conca = String(data: key_conca_data, encoding: String.Encoding.utf8) as String!
+        print("Key conca: ", key_conca)
+        
+        var i = 0
+        let key_not_conca = key_conca?.split(separator: "=")
+        let key_hmac = key_not_conca![0] + "="
+        let key_aes = key_not_conca![1] + "="
+        //let key_aes = key_conca?.spli
+        print("hmac: ", key_hmac)
+        print("aes: ", key_aes)
+        
+        
+        // Check the tag
+        //let key_hmac = key_hmac.base64EncodedString(options: [])
+        //nsdataStr = NSData.init(data: key_hmac)
+        //str_key_hmac = nsdataStr.description.trimmingCharacters(in: CharacterSet.alphanumerics).replacingOccurrences(of: " ", with: "")
+        
+        print("Cypher_text received: ", inputJson.cypher_text)
+
+        let tag = inputJson.cypher_text.hmac(key: String(key_hmac))
+        
+        print("tag2: ", tag)
+        if (tag != inputJson.tag) {
+            print("Error, tags are not equals, data corrupted")
+            return nil
+        }
+        
+        let plain_text = inputJson.cypher_text.aesDecrypt(key: String(key_aes), iv: inputJson.iv, options: kCCOptionPKCS7Padding + kCCModeCBC)
+        
+        
+        
+        // Recover plain text with AES
+        //(String(data: cipher_text, encoding: String.Encoding.utf8) as String!).aesDecrypt(key: private_key, iv: <#T##String#>, options: <#T##Int#>)
+        
+        print("plain text: ", plain_text)
+        
+        return plain_text
+    }
+    
+    struct OutputPacket: Codable {
+        let cypher_text: String
+        let cypher_key: String
+        let iv: String
+        let tag: String
+    }
+    
 }
 
+extension Data {
+    
+    var utf8String: String? {
+        return string(as: .utf8)
+    }
+    
+    func string(as encoding: String.Encoding) -> String? {
+        return String(data: self, encoding: encoding)
+    }
+    
+}
