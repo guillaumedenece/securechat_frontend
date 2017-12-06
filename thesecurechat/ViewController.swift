@@ -5,7 +5,7 @@
 //  Created by Nicolas Chevrier on 20/10/2017.
 //  Copyright © 2017 Nicolas Chevrier. All rights reserved.
 //
-
+/*
 import UIKit
 //import Security.framework
 
@@ -191,15 +191,15 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             print("Problem with the public_key")
             return nil
         }
-
+        
         var errorEncrypt: Unmanaged<CFError>?
         guard let cypher_key = SecKeyCreateEncryptedData(public_key,
-                                                          algorithm,
-                                                          key_conca.data(using: String.Encoding.utf8)! as CFData,
-                                                          &errorEncrypt) as Data? else {
+                                                         algorithm,
+                                                         key_conca.data(using: String.Encoding.utf8)! as CFData,
+                                                         &errorEncrypt) as Data? else {
                                                             throw errorEncrypt!.takeRetainedValue() as Error
         }
-
+        
         let str_cypher_key = cypher_key.base64EncodedString(options: [])
         //print("Cypher text: " str_cypher_text)
         
@@ -213,7 +213,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
         let encoder = JSONEncoder()
         let outputJson = try! encoder.encode(output_packet)
         //print(String(data: outputJson, encoding: .utf8)!)
-
+        
         return outputJson
     }
     
@@ -238,11 +238,11 @@ class ViewController: UIViewController, UITextFieldDelegate  {
         
         var error: Unmanaged<CFError>?
         guard let key_conca_data = SecKeyCreateDecryptedData(private_key,
-                                                        algorithm,
-                                                        data!,
-                                                        //inputJson.cypher_key.data(using: String.Encoding.utf8)! as CFData,
-                                                        &error) as Data? else {
-                                                                throw error!.takeRetainedValue() as Error
+                                                             algorithm,
+                                                             data!,
+                                                             //inputJson.cypher_key.data(using: String.Encoding.utf8)! as CFData,
+            &error) as Data? else {
+                throw error!.takeRetainedValue() as Error
         }
         
         let key_conca = String(data: key_conca_data, encoding: String.Encoding.utf8) as String!
@@ -392,5 +392,5 @@ extension String {
         return String(hash)
     }
 }
-
+*/
 

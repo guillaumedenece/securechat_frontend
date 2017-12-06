@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pQ7-BD-6e8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-980.625" y="76.056338028169009"/>
+            <point key="canvasLocation" x="-973" y="-7"/>
         </scene>
         <!--Register-->
         <scene sceneID="DXs-d1-Xuv">
@@ -95,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOd-9u-Wt2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-69" y="414"/>
+            <point key="canvasLocation" x="-69" y="367"/>
         </scene>
         <!--Choice-->
         <scene sceneID="r1d-ct-HCH">
@@ -128,12 +128,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqB-Vx-q8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="784" y="112"/>
+            <point key="canvasLocation" x="767" y="-335"/>
         </scene>
         <!--Send-->
         <scene sceneID="ArS-4n-9na">
             <objects>
-                <viewController title="Send" id="MRH-bX-GhH" sceneMemberID="viewController">
+                <viewController title="Send" id="MRH-bX-GhH" customClass="SendViewController" customModule="thesecurechat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayX-T0-W0C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,8 +166,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgj-Cv-2f1" userLabel="Message">
-                                <rect key="frame" x="29" y="274" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgj-Cv-2f1" userLabel="Message">
+                                <rect key="frame" x="29" y="274" width="69" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -184,15 +184,23 @@
                                 <rect key="frame" x="142" y="455" width="36" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="clickSend:" destination="MRH-bX-GhH" eventType="touchUpInside" id="v9n-R5-ZzO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mQi-d8-cH1"/>
                     </view>
+                    <connections>
+                        <outlet property="lmkj" destination="vOX-o4-LCv" id="dbp-KX-O7N"/>
+                        <outlet property="message" destination="yQo-vd-FCr" id="4QD-m6-mCz"/>
+                        <outlet property="username" destination="54b-Kg-JNc" id="Gs0-3c-Dcb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6N-Us-QQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1608.75" y="-392.95774647887322"/>
+            <point key="canvasLocation" x="1673" y="-668"/>
         </scene>
         <!--Receive-->
         <scene sceneID="8GK-U4-gj2">
@@ -220,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwk-Mg-Shd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1608.75" y="385.56338028169017"/>
+            <point key="canvasLocation" x="1673" y="42"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ctO-co-la1">
@@ -301,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kW-7h-ZvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-68" y="-376"/>
+            <point key="canvasLocation" x="-69" y="-334"/>
         </scene>
         <!--Message-->
         <scene sceneID="tne-QT-ifu">
@@ -381,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="-1064"/>
+            <point key="canvasLocation" x="594" y="-1230"/>
         </scene>
     </scenes>
 </document>
