@@ -14,6 +14,8 @@
 		030B18201F9AE5F500B2F62E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */; };
 		030B182B1F9AE5F500B2F62E /* thesecurechatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B182A1F9AE5F500B2F62E /* thesecurechatTests.swift */; };
 		030B18361F9AE5F500B2F62E /* thesecurechatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */; };
+		03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */; };
+		03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F701FD69A2300CC1FF3 /* LoginViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,8 @@
 		030B18311F9AE5F500B2F62E /* thesecurechatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thesecurechatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thesecurechatUITests.swift; sourceTree = "<group>"; };
 		030B18371F9AE5F500B2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		03308F701FD69A2300CC1FF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +109,9 @@
 			children = (
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
 				030B18171F9AE5F500B2F62E /* ViewController.swift */,
+				03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
+				03308F701FD69A2300CC1FF3 /* LoginViewController.swift */,
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
 				030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */,
 				030B18211F9AE5F500B2F62E /* Info.plist */,
@@ -273,8 +279,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
 				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
+				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

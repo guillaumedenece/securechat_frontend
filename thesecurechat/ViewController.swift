@@ -176,7 +176,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
         
         // Tag with HMAC
         let tag = cypher_text?.hmac(key: str_key_hmac)
-        //print("TAG:", tag)
+        print("TAG:", tag)
         
         
         // Concatenate keys
