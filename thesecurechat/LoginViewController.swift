@@ -7,7 +7,9 @@
 //
 
 import UIKit
-var idToken: String? = nil;
+var idToken: String? = nil
+var thePrivateKey: SecKey? = nil
+var thePublicKey: SecKey? = nil
 
 class LoginViewController: UIViewController {
     
@@ -77,6 +79,11 @@ class LoginViewController: UIViewController {
                                                 if let newIdToken = ans2["idToken"] as? String {
                                                     idToken = newIdToken;
                                                     DispatchQueue.main.async {
+                                                        // Get the private key of the user
+                                                        thePrivateKey = getPrivateKey(username: self.username.text!)
+                                                        
+                                                        // Get the public key
+                                                        thePublicKey = SecKeyCopyPublicKey(thePrivateKey!);
                                                         self.performSegue(withIdentifier: "loginCheck", sender: self);
                                                     }
                                                 }

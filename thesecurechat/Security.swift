@@ -10,26 +10,64 @@
 import UIKit
 
 // Generate a private key
-func generate_privateKey() -> SecKey?{
+func generate_privateKey(keytag: String) -> SecKey? {
+    let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                 kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+                                                 .privateKeyUsage,
+                                                 nil)!
     
-    let attributes: [String: Any] =
-        //[kSecAttrKeyType as String:            kSecAttrKeyTypeRSA,  //kSecAttrKeyTypeECSECPrimeRandom,
-        // kSecAttrKeySizeInBits as String:      2048,                //256,
-        [kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
-         kSecAttrKeySizeInBits as String:      256,
-         kSecPrivateKeyAttrs as String:
-            [kSecAttrIsPermanent as String:    true,
-             kSecAttrApplicationTag as String: "mykey".data(using: .utf8)!]
+    let attributes: [String: Any] = [
+        kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
+        kSecAttrKeySizeInBits as String:      256,
+        //kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave, // Indicate that the generation operation should take place inside the Secure Enclave (doesn't work on simulator)
+        kSecPrivateKeyAttrs as String: [
+            kSecAttrIsPermanent as String:      true,
+            kSecAttrApplicationTag as String:   keytag.data(using: .utf8)!,
+            kSecAttrAccessControl as String:    access
+        ]
     ]
     
     var error: Unmanaged<CFError>?
-    //guard
-    let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) //else {
-    //throw error!.takeRetainedValue() as Error
-    //}
+    let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error)
+    
+    if(privateKey == nil)
+    {
+        print("Error nil")
+        print(error!)
+    }
     
     return privateKey;
 }
+
+func getPrivateKey(username: String) -> SecKey? {
+    let keytag = "thesecurechatkey" + username
+    // Search for an already existing key
+    let query: [String: Any] = [kSecClass as String: kSecClassKey,
+                                   kSecAttrApplicationTag as String: keytag.data(using: .utf8)!,
+                                   kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+                                   kSecReturnRef as String: true]
+    
+    var item: CFTypeRef?
+    let status = SecItemCopyMatching(query as CFDictionary, &item)
+    
+    var privatekey: SecKey
+    
+    // If a key doesn't exist generate one
+    if(status != errSecSuccess)
+    {
+        print("GENERATE A NEW PRIVATE KEY")
+        privatekey = generate_privateKey(keytag: keytag)!
+    }
+    // else retrieve the old one
+    else
+    {
+        print("RETRIEVE OLD PRIVATE KEY")
+        privatekey = item as! SecKey
+    }
+    
+    return privatekey
+}
+
 
 func encrypter(plain_text: String, public_key: SecKey) throws -> Data? {
     let key_size: Int = 256/8;
