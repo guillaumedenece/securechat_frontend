@@ -27,7 +27,44 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginClick(_ sender: Any) {
 
-        print(username.text);
+        let parameters = ["username": username.text]
+        
+        guard let url = URL(string: "https://thesecurechat.me:3000/authentication/login/first") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let ans = json as? [String: Any] {
+                        if let salt = ans["salt"] as? String {
+                            if let challenge = ans["challenge"] as? String {
+                                print("salt: ", salt);
+                                print("challenge: ", challenge);
+                            }
+                        } else {
+                            print("missing parameters");
+                        }
+                        
+                    } else {
+                        print(json);
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+            
+            }.resume()
+        
     }
     
     /*
