@@ -12,7 +12,6 @@ class EntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -23,7 +22,6 @@ class EntryViewController: UIViewController {
     
 
     @IBAction func loginPushed(_ sender: Any) {
-        
     }
     
     @IBAction func registerPushed(_ sender: Any) {

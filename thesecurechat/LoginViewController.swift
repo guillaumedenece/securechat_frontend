@@ -7,6 +7,7 @@
 //
 
 import UIKit
+var idToken: String? = nil;
 
 class LoginViewController: UIViewController {
     
@@ -28,6 +29,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func clickLogin(_ sender: UIButton) {
         let parameters = ["username": username.text];
+        print("idToken: ", idToken);
         
         guard let url = URL(string: "https://thesecurechat.me:3000/authentication/login/first") else { return }
         var request = URLRequest(url: url)
@@ -72,7 +74,8 @@ class LoginViewController: UIViewController {
                                             let json2 = try JSONSerialization.jsonObject(with: data2, options: [])
                                             print("token: ", json2);
                                             if let ans2 = json2 as? [String: Any] {
-                                                if let idToken = ans2["idToken"] as? String {
+                                                if let newIdToken = ans2["idToken"] as? String {
+                                                    idToken = newIdToken;
                                                     DispatchQueue.main.async {
                                                         self.performSegue(withIdentifier: "loginCheck", sender: self);
                                                     }
