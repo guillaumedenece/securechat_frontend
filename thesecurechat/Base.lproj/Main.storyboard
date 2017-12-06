@@ -231,8 +231,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="loginClick:" destination="SQX-Fw-vNi" eventType="touchUpInside" id="h9s-xe-4bz"/>
-                                    <segue destination="DE3-fX-s0x" kind="showDetail" id="xfD-79-nhR"/>
+                                    <action selector="clickLogin:" destination="SQX-Fw-vNi" eventType="touchUpInside" id="KVF-Ra-XNh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -242,6 +241,7 @@
                     <connections>
                         <outlet property="password" destination="WPU-qA-UaI" id="07g-4G-aZ0"/>
                         <outlet property="username" destination="EeE-uZ-M4U" id="ola-EE-vJu"/>
+                        <segue destination="DE3-fX-s0x" kind="show" identifier="loginCheck" id="OW7-nS-LKz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kW-7h-ZvR" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -25,10 +25,13 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginClick(_ sender: Any) {
 
-        print(username.text);
+    @IBAction func clickLogin(_ sender: UIButton) {
+        if(true){
+            self.performSegue(withIdentifier: "loginCheck", sender: self)
+        }
     }
+  
     
     /*
     // MARK: - Navigation
