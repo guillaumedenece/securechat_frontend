@@ -7,6 +7,7 @@
 //
 
 import UIKit
+var idToken: String? = nil;
 
 class LoginViewController: UIViewController {
     
@@ -27,7 +28,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func clickLogin(_ sender: UIButton) {
-        let parameters = ["username": username.text]
+        let parameters = ["username": username.text];
+        print("idToken: ", idToken);
         
         guard let url = URL(string: "https://thesecurechat.me:3000/authentication/login/first") else { return }
         var request = URLRequest(url: url)
@@ -38,6 +40,7 @@ class LoginViewController: UIViewController {
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
+            session.finishTasksAndInvalidate();
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -65,21 +68,30 @@ class LoginViewController: UIViewController {
                                 
                                 let session2 = URLSession.shared;
                                 session2.dataTask(with: request2) { (data2, response2, error2) in
+                                    session2.finishTasksAndInvalidate();
                                     if let data2 = data2 {
                                         do {
                                             let json2 = try JSONSerialization.jsonObject(with: data2, options: [])
                                             print("token: ", json2);
+                                            if let ans2 = json2 as? [String: Any] {
+                                                if let newIdToken = ans2["idToken"] as? String {
+                                                    idToken = newIdToken;
+                                                    DispatchQueue.main.async {
+                                                        self.performSegue(withIdentifier: "loginCheck", sender: self);
+                                                    }
+                                                }
+                                            }
                                         } catch {
-                                            print(error)
+                                            print(error);
                                         }
                                         
                                     }
                                 }.resume()
                             } else {
-                                print("missing parameters");
+                                print("missing challenge");
                             }
                         } else {
-                            print("missing parameters");
+                            print("missing salt");
                         }} else {
                              print(json);
                         }
@@ -88,23 +100,12 @@ class LoginViewController: UIViewController {
                     }
                 }
             }.resume()
-            
-            self.performSegue(withIdentifier: "loginCheck", sender: self)
-            
+        
         }
         
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destinationViewController.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
     }
+
+
     extension String {
         
         func sha256() -> String{

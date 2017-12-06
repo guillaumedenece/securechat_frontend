@@ -100,7 +100,7 @@
         <!--Choice-->
         <scene sceneID="r1d-ct-HCH">
             <objects>
-                <viewController title="Choice" id="DE3-fX-s0x" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="choiceViewControllerID" title="Choice" id="DE3-fX-s0x" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JCy-R0-9Bj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
