@@ -18,6 +18,7 @@
 		03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F701FD69A2300CC1FF3 /* LoginViewController.swift */; };
 		03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */; };
 		03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F741FD7AF4700CC1FF3 /* Security.swift */; };
+		03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		03308F701FD69A2300CC1FF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		03308F741FD7AF4700CC1FF3 /* Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
+		03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshViewController.swift; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
 				030B18171F9AE5F500B2F62E /* ViewController.swift */,
 				03308F741FD7AF4700CC1FF3 /* Security.swift */,
+				03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */,
 				03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
 				03308F701FD69A2300CC1FF3 /* LoginViewController.swift */,
@@ -289,6 +292,7 @@
 				03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */,
 				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
+				03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */,
 				03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */,
 				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
 			);

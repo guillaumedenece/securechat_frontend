@@ -27,8 +27,6 @@ class SendViewController: UIViewController {
     
     @IBAction func clickSend(_ sender: UIButton) {
         
-        var idtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlvIiwiaWF0IjoxNTEyNTQxMTY0LCJleHAiOjE1MTI1NDQ3NjR9.wny7kwIierG3pKM3ndaF8l4luNpnb8mzlHfCbDBnlBA"
-        
         // Convert the public key into a SecKey
         guard let data2 = Data.init(base64Encoded: publickey.text!) else {
             return
