@@ -27,6 +27,7 @@ class SendViewController: UIViewController {
     
     @IBAction func clickSend(_ sender: UIButton) {
         
+        print("click send")
         // Convert the public key into a SecKey
         guard let data2 = Data.init(base64Encoded: publickey.text!) else {
             return
@@ -42,24 +43,28 @@ class SendViewController: UIViewController {
         guard let thePublicKey = SecKeyCreateWithData(data2 as CFData, keyDict as CFDictionary, nil) else {
             return
         }
-        
+        print("before cipher")
         // Encrypt the message
         var cipher_text: Data? = nil;
         
         do {
             try cipher_text = encrypter(plain_text: message.text!, public_key: thePublicKey)!
+            print("after cipher")
         }
         catch {
             print("Error \(error)")
         }
         
+        print("before send")
+        
         // Create a JSON
-        /*let parameters = ["username": username.text!, "message": cipher_text!] as [String : Any]
+        let parameters = ["to_user_id": username.text!, "message": cipher_text!] as [String : Any]
         
         guard let url = URL(string: "https://thesecurechat.me:3000/messages/send") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue(idtoken, forHTTPHeaderField: "idToken")
+        request.addValue(idToken!, forHTTPHeaderField: "idToken")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
@@ -69,45 +74,12 @@ class SendViewController: UIViewController {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let ans = json as? [String: Any] {
-                        if let salt = ans["salt"] as? String {
-                            if let challenge = ans["challenge"] as? String {
-                                print("salt: ", salt);
-                                print("challenge: ", challenge);
-                                
-                                // if let self.password.text
-                                let passwordANDsalt = self.password.text! + salt;
-                                let passwordANDsaltHASH = passwordANDsalt.sha256();
-                                print("passwordANDsaltHASH: ", passwordANDsaltHASH)
-                                let challengeANDpasswordANDsaltHASH = passwordANDsaltHASH + challenge;
-                                let solution = challengeANDpasswordANDsaltHASH.sha256();
-                                print("hash_password: ", solution);
-                                
-                                guard let url2 = URL(string: "https://thesecurechat.me:3000/authentication/login/second") else { return }
-                                var request2 = URLRequest(url: url2)
-                                request2.httpMethod = "POST"
-                                request2.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                                let parameters2 = ["username": self.username.text!, "hash_password_challenge": solution] as [String : Any];
-                                guard let httpBody2 = try? JSONSerialization.data(withJSONObject: parameters2, options: []) else { return }
-                                request2.httpBody = httpBody2;
-                                
-                                let session2 = URLSession.shared;
-                                session2.dataTask(with: request2) { (data2, response2, error2) in
-                                    if let data2 = data2 {
-                                        do {
-                                            let json2 = try JSONSerialization.jsonObject(with: data2, options: [])
-                                            print("token: ", json2);
-                                        } catch {
-                                            print(error)
-                                        }
-                                        
-                                    }
-                                    }.resume()
-                            } else {
-                                print("missing parameters");
-                            }
+                        if let success = ans["success"] as? String {
+                            print("message sent")
                         } else {
-                            print("missing parameters");
-                        }} else {
+                            print("message not sent")
+                        }
+                    } else {
                         print(json);
                     }
                 } catch {
@@ -115,7 +87,7 @@ class SendViewController: UIViewController {
                 }
             }
             }.resume()
- */
+ 
     }
 
 
