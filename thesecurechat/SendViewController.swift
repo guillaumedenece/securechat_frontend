@@ -43,16 +43,23 @@ class SendViewController: UIViewController {
             return
         }
         
+ 
+        
         let keyDict:[NSObject:NSObject] = [
             kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrKeyClass: kSecAttrKeyClassPublic,
-            kSecAttrKeySizeInBits: 256 as NSObject,
+            kSecAttrKeySizeInBits: NSNumber(value: 256),
             kSecReturnPersistentRef: true as NSObject
         ]
+        
+        
+  
         
         guard let publicKey = SecKeyCreateWithData(data2 as CFData, keyDict as CFDictionary, nil) else {
             return
         }
+        
+      
         
         do {
             try cipher_text = encrypter(plain_text: message.text!, public_key: publicKey)!

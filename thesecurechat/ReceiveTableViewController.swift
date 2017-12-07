@@ -8,15 +8,14 @@
 
 import UIKit
 
+var messages = [ReceiveMessage]()
+
 class ReceiveTableViewController: UITableViewController {
     
-    var messages = [ReceiveMessage]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        messages.append(ReceiveMessage.init(from: "BOB", message: "HELO")!)
-        messages.append(ReceiveMessage.init(from: "Alice", message: "jdshkf")!)
         
         guard let url = URL(string: "https://thesecurechat.me:3000/messages/receive") else { return }
         var request = URLRequest(url: url)
@@ -38,8 +37,7 @@ class ReceiveTableViewController: UITableViewController {
                                         let data = NSData(base64Encoded: content, options: .ignoreUnknownCharacters)
                                         try decryptedMessage = decrypter(cypher_text: data! as Data, private_key: thePrivateKey!)!
                                         
-                                        self.messages.append(ReceiveMessage.init(from: "Carotte", message: "fhf")!)
-                                        self.messages.append(ReceiveMessage.init(from: from_user_id, message: decryptedMessage)!)
+                                        messages.append(ReceiveMessage.init(from: from_user_id, message: decryptedMessage)!)
                                         
                                         print("decripted message: ", decryptedMessage);
                                         print("from: ", from_user_id);
@@ -55,7 +53,7 @@ class ReceiveTableViewController: UITableViewController {
                                 print("content missing");
                             }
                         }
-                        print(self.messages);
+                        print(messages);
                     }
                 } catch {
                     print(error);
@@ -96,7 +94,7 @@ class ReceiveTableViewController: UITableViewController {
             let cell = (tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReceiveTableViewCell)!
 
         // Fetches the appropriate meal for the data source layout.
-        let receiveMessage = self.messages[indexPath.row]
+        let receiveMessage = messages[indexPath.row]
 
             cell.from.text = receiveMessage.from
             cell.message.text = receiveMessage.message
