@@ -20,8 +20,9 @@
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
 		034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */; };
 		034A3BBA1FD8E8C100D9AB17 /* old in Resources */ = {isa = PBXBuildFile; fileRef = 034A3BB91FD8E8C000D9AB17 /* old */; };
-		034A3BBD1FD8E8D700D9AB17 /* ReceiveUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */; };
+		034A3BBD1FD8E8D700D9AB17 /* ReceiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBB1FD8E8D600D9AB17 /* ReceiveTableViewCell.swift */; };
 		034A3BBE1FD8E8D700D9AB17 /* ReceiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */; };
+		034A3BC01FD8F0FC00D9AB17 /* ReceiveMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBF1FD8F0FC00D9AB17 /* ReceiveMessage.swift */; };
 		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +63,9 @@
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		034A3BB91FD8E8C000D9AB17 /* old */ = {isa = PBXFileReference; lastKnownFileType = folder; path = old; sourceTree = "<group>"; };
-		034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveUITableViewCell.swift; sourceTree = "<group>"; };
+		034A3BBB1FD8E8D600D9AB17 /* ReceiveTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveTableViewCell.swift; sourceTree = "<group>"; };
 		034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveTableViewController.swift; sourceTree = "<group>"; };
+		034A3BBF1FD8F0FC00D9AB17 /* ReceiveMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveMessage.swift; sourceTree = "<group>"; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 		4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +134,8 @@
 				4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */,
 				03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */,
 				034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */,
-				034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */,
+				034A3BBF1FD8F0FC00D9AB17 /* ReceiveMessage.swift */,
+				034A3BBB1FD8E8D600D9AB17 /* ReceiveTableViewCell.swift */,
 			);
 			path = thesecurechat;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				034A3BBE1FD8E8D700D9AB17 /* ReceiveTableViewController.swift in Sources */,
+				034A3BC01FD8F0FC00D9AB17 /* ReceiveMessage.swift in Sources */,
 				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
 				4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */,
 				03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */,
@@ -306,7 +310,7 @@
 				03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */,
 				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
 				034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */,
-				034A3BBD1FD8E8D700D9AB17 /* ReceiveUITableViewCell.swift in Sources */,
+				034A3BBD1FD8E8D700D9AB17 /* ReceiveTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
