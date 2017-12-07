@@ -20,6 +20,7 @@
 		03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F741FD7AF4700CC1FF3 /* Security.swift */; };
 		03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
+		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
 		034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
+		4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
 				030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */,
 				030B18211F9AE5F500B2F62E /* Info.plist */,
+				4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */,
 				03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */,
 			);
 			path = thesecurechat;
@@ -292,6 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
+				4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */,
+				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
 				03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */,
 				030B18181F9AE5F500B2F62E /* oldsecurityfile.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
