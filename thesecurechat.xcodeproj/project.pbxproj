@@ -17,6 +17,7 @@
 		03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */; };
 		03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F701FD69A2300CC1FF3 /* LoginViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
+		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		03308F701FD69A2300CC1FF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
+		4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
 				030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */,
 				030B18211F9AE5F500B2F62E /* Info.plist */,
+				4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */,
 			);
 			path = thesecurechat;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
+				4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */,
 				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
 				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
