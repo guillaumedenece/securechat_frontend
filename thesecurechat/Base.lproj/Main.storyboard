@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="lkz-UC-f2T" customClass="ReceiveUITableViewCell" customModule="thesecurechat" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="lkz-UC-f2T" customClass="ReceiveTableViewCell" customModule="thesecurechat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lkz-UC-f2T" id="2kv-po-y1R">
@@ -187,8 +187,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="from" destination="lYv-bf-hmF" id="W74-Fs-dOs"/>
-                                    <outlet property="message" destination="due-fv-Dxf" id="Fi1-oM-ha4"/>
+                                    <outlet property="from" destination="lYv-bf-hmF" id="9Yp-6f-gfv"/>
+                                    <outlet property="message" destination="due-fv-Dxf" id="e1S-nf-FRY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

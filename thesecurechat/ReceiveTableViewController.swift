@@ -15,6 +15,13 @@ class ReceiveTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("HELLO")
+        
+        messages.append(ReceiveMessage.init(from: "Nicolas", message: "Mon message")!)
+        messages.append(ReceiveMessage.init(from: "Bob", message: "Mon message2")!)
+        
+        print("HELLO")
+        
         ////// GUILAUMME CODE .....
         
         
@@ -34,12 +41,12 @@ class ReceiveTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0//1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return messages.count
+        return 0//messages.count
     }
 
     /*
@@ -51,9 +58,12 @@ class ReceiveTableViewController: UITableViewController {
         // Fetches the appropriate meal for the data source layout.
         let receiveMessage = messages[indexPath.row]
 
-        return cell
-    }*/
- 
+        cell?.from.text = receiveMessage.from
+        cell?.message.text = receiveMessage.message
+        
+        return cell!
+    }
+ */
 
     /*
     // Override to support conditional editing of the table view.
