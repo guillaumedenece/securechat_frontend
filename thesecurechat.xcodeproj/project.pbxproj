@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18151F9AE5F500B2F62E /* AppDelegate.swift */; };
-		030B18181F9AE5F500B2F62E /* oldsecurityfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */; };
 		030B181B1F9AE5F500B2F62E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B18191F9AE5F500B2F62E /* Main.storyboard */; };
 		030B181D1F9AE5F500B2F62E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030B181C1F9AE5F500B2F62E /* Assets.xcassets */; };
 		030B18201F9AE5F500B2F62E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		030B18121F9AE5F500B2F62E /* thesecurechat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = thesecurechat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		030B18151F9AE5F500B2F62E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldsecurityfile.swift; sourceTree = "<group>"; };
 		030B181A1F9AE5F500B2F62E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		030B181C1F9AE5F500B2F62E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		030B181F1F9AE5F500B2F62E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
