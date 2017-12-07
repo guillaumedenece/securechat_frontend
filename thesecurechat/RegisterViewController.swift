@@ -26,6 +26,11 @@ class RegisterViewController: UIViewController {
     
     @IBAction func register(_ sender: Any) {
         let parameters = ["username": username.text];
+        let alertRegister = UIAlertController(title: "register", message: "success", preferredStyle: .alert);
+        let alertNotRegister = UIAlertController(title: "register", message: "not success", preferredStyle: .alert);
+        let actionOk = UIAlertAction(title: "ok", style: .default, handler: nil)
+        alertRegister.addAction(actionOk);
+        alertNotRegister.addAction(actionOk);
         
         guard let url = URL(string: "https://thesecurechat.me:3000/authentication/register/first") else { return }
         var request = URLRequest(url: url)
@@ -66,22 +71,38 @@ class RegisterViewController: UIViewController {
                                             print("ans: ", json2);
                                             if let ans2 = json2 as? [String: Any] {
                                                 if let register = ans2["register"] as? String {
-//                                                    DispatchQueue.main.async {
-//                                                        self.performSegue(withIdentifier: "loginCheck", sender: self);
-//                                                    }
+                                                    DispatchQueue.main.async {
+                                                        self.present(alertRegister, animated: true, completion: nil);
+                                                    }
+                                                } else {
+                                                    DispatchQueue.main.async {
+                                                        self.present(alertNotRegister, animated: true, completion: nil);
+                                                    }
                                                 }
                                             }
                                         } catch {
+                                            DispatchQueue.main.async {
+                                                self.present(alertNotRegister, animated: true, completion: nil);
+                                            }
                                             print(error);
                                         }
                                     }
                                 }.resume()
                         } else {
+                            DispatchQueue.main.async {
+                                self.present(alertNotRegister, animated: true, completion: nil);
+                            }
                             print("missing salt");
                         }} else {
+                        DispatchQueue.main.async {
+                            self.present(alertNotRegister, animated: true, completion: nil);
+                        }
                         print(json);
                     }
                 } catch {
+                    DispatchQueue.main.async {
+                        self.present(alertNotRegister, animated: true, completion: nil);
+                    }
                     print(error);
                 }
             }

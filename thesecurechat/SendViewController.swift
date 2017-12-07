@@ -26,6 +26,12 @@ class SendViewController: UIViewController {
     
     @IBAction func clickSend(_ sender: UIButton) {
         
+        let alertSent = UIAlertController(title: "message", message: "sent", preferredStyle: .alert);
+        let alertNotSent = UIAlertController(title: "message", message: "not sent", preferredStyle: .alert);
+        let actionOk = UIAlertAction(title: "ok", style: .default, handler: nil)
+        alertSent.addAction(actionOk);
+        alertNotSent.addAction(actionOk);
+        
         print("click send")
 
         print("before cipher")
@@ -61,9 +67,13 @@ class SendViewController: UIViewController {
                     if let ans = json as? [String: Any] {
                         print("ans: ", json);
                         if let success = ans["success"] as? String {
-                            print("message sent")
+                            DispatchQueue.main.async {
+                                self.present(alertSent, animated: true, completion: nil);
+                            }
                         } else {
-                            print("message not sent")
+                            DispatchQueue.main.async {
+                            self.present(alertNotSent, animated: true, completion: nil);
+                            }
                         }
                     } else {
                         print(json);

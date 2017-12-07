@@ -32,6 +32,9 @@ class LoginViewController: UIViewController {
     @IBAction func clickLogin(_ sender: UIButton) {
         let parameters = ["username": username.text];
         print("idToken: ", idToken);
+        let alertNotLogin = UIAlertController(title: "login", message: "username or/and password are wrong", preferredStyle: .alert);
+        let actionOk = UIAlertAction(title: "ok", style: .default, handler: nil)
+        alertNotLogin.addAction(actionOk);
         
         guard let url = URL(string: "https://thesecurechat.me:3000/authentication/login/first") else { return }
         var request = URLRequest(url: url)
@@ -86,23 +89,46 @@ class LoginViewController: UIViewController {
                                                         thePublicKey = SecKeyCopyPublicKey(thePrivateKey!);
                                                         self.performSegue(withIdentifier: "loginCheck", sender: self);
                                                     }
+                                                } else {
+                                                    DispatchQueue.main.async {
+                                                        self.present(alertNotLogin, animated: true, completion: nil);
+                                                    }
                                                 }
                                             }
                                         } catch {
+                                            DispatchQueue.main.async {
+                                                self.present(alertNotLogin, animated: true, completion: nil);
+                                            }
                                             print(error);
                                         }
                                         
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            self.present(alertNotLogin, animated: true, completion: nil);
+                                        }
                                     }
                                 }.resume()
                             } else {
+                                DispatchQueue.main.async {
+                                    self.present(alertNotLogin, animated: true, completion: nil);
+                                }
                                 print("missing challenge");
                             }
                         } else {
+                            DispatchQueue.main.async {
+                                self.present(alertNotLogin, animated: true, completion: nil);
+                            }
                             print("missing salt");
                         }} else {
+                        DispatchQueue.main.async {
+                            self.present(alertNotLogin, animated: true, completion: nil);
+                        }
                              print(json);
                         }
                     } catch {
+                        DispatchQueue.main.async {
+                            self.present(alertNotLogin, animated: true, completion: nil);
+                        }
                         print(error);
                     }
                 }
