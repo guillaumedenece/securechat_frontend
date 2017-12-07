@@ -22,8 +22,7 @@ class ReceiveTableViewController: UITableViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue(idToken!, forHTTPHeaderField: "idToken")
-        
-        print("11111")
+
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -38,7 +37,10 @@ class ReceiveTableViewController: UITableViewController {
                                     do {
                                         let data = NSData(base64Encoded: content, options: .ignoreUnknownCharacters)
                                         try decryptedMessage = decrypter(cypher_text: data! as Data, private_key: thePrivateKey!)!
+                                        
+                                        self.messages.append(ReceiveMessage.init(from: "Carotte", message: "fhf")!)
                                         self.messages.append(ReceiveMessage.init(from: from_user_id, message: decryptedMessage)!)
+                                        
                                         print("decripted message: ", decryptedMessage);
                                         print("from: ", from_user_id);
                                     }
@@ -88,17 +90,20 @@ class ReceiveTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cellIdentifier = "ReceiveTableViewCell"
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReceiveTableViewCell
+            let cell = (tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReceiveTableViewCell)!
 
         // Fetches the appropriate meal for the data source layout.
-        let receiveMessage = messages[indexPath.row]
+        let receiveMessage = self.messages[indexPath.row]
 
-        cell?.from.text = receiveMessage.from
-        cell?.message.text = receiveMessage.message
+            cell.from.text = receiveMessage.from
+            cell.message.text = receiveMessage.message
         
-        return cell!
+        
+        
+        return cell
     }
  
 
