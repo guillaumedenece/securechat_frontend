@@ -10,6 +10,7 @@ import UIKit
 
 class SendViewController: UIViewController {
  
+    @IBOutlet weak var publickey: UITextField!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var message: UITextField!
     
@@ -38,8 +39,23 @@ class SendViewController: UIViewController {
         // Encrypt the message
         var cipher_text: Data? = nil;
         
+        guard let data2 = Data.init(base64Encoded: publickey.text!) else {
+            return
+        }
+        
+        let keyDict:[NSObject:NSObject] = [
+            kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrKeyClass: kSecAttrKeyClassPublic,
+            kSecAttrKeySizeInBits: 256 as NSObject,
+            kSecReturnPersistentRef: true as NSObject
+        ]
+        
+        guard let publicKey = SecKeyCreateWithData(data2 as CFData, keyDict as CFDictionary, nil) else {
+            return
+        }
+        
         do {
-            try cipher_text = encrypter(plain_text: message.text!, public_key: thePublicKey!)!
+            try cipher_text = encrypter(plain_text: message.text!, public_key: publicKey)!
             print("after cipher")
         }
         catch {
@@ -49,7 +65,7 @@ class SendViewController: UIViewController {
         print("before send")
         
         // Create a JSON
-        let parameters = ["to_user_id": username.text!, "message": cipher_text?.base64EncodedString()] as [String : Any]
+        let parameters = ["to_user_id": username.text!, "message": cipher_text?.base64EncodedString()]
         
         guard let url = URL(string: "https://thesecurechat.me:3000/messages/send") else { return }
         var request = URLRequest(url: url)
@@ -66,7 +82,7 @@ class SendViewController: UIViewController {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let ans = json as? [String: Any] {
                         print("ans: ", json);
-                        if let success = ans["success"] as? String {
+                        if (ans["success"] as? String) != nil {
                             DispatchQueue.main.async {
                                 self.present(alertSent, animated: true, completion: nil);
                             }

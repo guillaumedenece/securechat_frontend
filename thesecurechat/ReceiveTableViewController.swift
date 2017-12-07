@@ -15,10 +15,15 @@ class ReceiveTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        messages.append(ReceiveMessage.init(from: "BOB", message: "HELO")!)
+        messages.append(ReceiveMessage.init(from: "Alice", message: "jdshkf")!)
+        
         guard let url = URL(string: "https://thesecurechat.me:3000/messages/receive") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue(idToken!, forHTTPHeaderField: "idToken")
+        
+        print("11111")
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -35,6 +40,7 @@ class ReceiveTableViewController: UITableViewController {
                                         try decryptedMessage = decrypter(cypher_text: data! as Data, private_key: thePrivateKey!)!
                                         self.messages.append(ReceiveMessage.init(from: from_user_id, message: decryptedMessage)!)
                                         print("decripted message: ", decryptedMessage);
+                                        print("from: ", from_user_id);
                                     }
                                     catch {
                                         print("Error \(error)")
@@ -72,16 +78,15 @@ class ReceiveTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0//1
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0//messages.count
+        return messages.count
     }
     
-    /*
-<<<<<<< HEAD
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ReceiveTableViewCell"
         
@@ -95,22 +100,8 @@ class ReceiveTableViewController: UITableViewController {
         
         return cell!
     }
- */
+ 
 
-=======
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cellIdentifier = "ReceiveTableViewCell"
-     
-     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReceiveTableViewCell
-     
-     // Fetches the appropriate meal for the data source layout.
-     let receiveMessage = messages[indexPath.row]
-     
-     return cell
-     }*/
-    
-    
->>>>>>> 25d077da6f89b7e7a900ce25c3d971087aea27d7
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
