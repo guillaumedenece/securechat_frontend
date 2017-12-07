@@ -17,10 +17,12 @@
 		03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F701FD69A2300CC1FF3 /* LoginViewController.swift */; };
 		03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */; };
 		03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F741FD7AF4700CC1FF3 /* Security.swift */; };
-		03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
-		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
 		034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */; };
+		034A3BBA1FD8E8C100D9AB17 /* old in Resources */ = {isa = PBXBuildFile; fileRef = 034A3BB91FD8E8C000D9AB17 /* old */; };
+		034A3BBD1FD8E8D700D9AB17 /* ReceiveUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */; };
+		034A3BBE1FD8E8D700D9AB17 /* ReceiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */; };
+		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +59,11 @@
 		03308F701FD69A2300CC1FF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		03308F741FD7AF4700CC1FF3 /* Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
-		03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshViewController.swift; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
+		034A3BB91FD8E8C000D9AB17 /* old */ = {isa = PBXFileReference; lastKnownFileType = folder; path = old; sourceTree = "<group>"; };
+		034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveUITableViewCell.swift; sourceTree = "<group>"; };
+		034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveTableViewController.swift; sourceTree = "<group>"; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 		4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,10 +119,9 @@
 		030B18141F9AE5F500B2F62E /* thesecurechat */ = {
 			isa = PBXGroup;
 			children = (
+				034A3BB91FD8E8C000D9AB17 /* old */,
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
-				030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */,
 				03308F741FD7AF4700CC1FF3 /* Security.swift */,
-				03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */,
 				03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
 				034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */,
@@ -128,6 +131,8 @@
 				030B18211F9AE5F500B2F62E /* Info.plist */,
 				4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */,
 				03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */,
+				034A3BBC1FD8E8D700D9AB17 /* ReceiveTableViewController.swift */,
+				034A3BBB1FD8E8D600D9AB17 /* ReceiveUITableViewCell.swift */,
 			);
 			path = thesecurechat;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 			files = (
 				030B18201F9AE5F500B2F62E /* LaunchScreen.storyboard in Resources */,
 				030B181D1F9AE5F500B2F62E /* Assets.xcassets in Resources */,
+				034A3BBA1FD8E8C100D9AB17 /* old in Resources */,
 				030B181B1F9AE5F500B2F62E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,16 +298,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034A3BBE1FD8E8D700D9AB17 /* ReceiveTableViewController.swift in Sources */,
 				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
 				4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */,
-				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
 				03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */,
-				030B18181F9AE5F500B2F62E /* oldsecurityfile.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
-				03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */,
 				03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */,
 				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
 				034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */,
+				034A3BBD1FD8E8D700D9AB17 /* ReceiveUITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -157,13 +157,13 @@
         <!--Receive-->
         <scene sceneID="8GK-U4-gj2">
             <objects>
-                <tableViewController title="Receive" id="3X8-nr-8j3" customClass="RefreshViewController" customModule="thesecurechat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Receive" id="3X8-nr-8j3" customClass="ReceiveTableViewController" customModule="thesecurechat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BiU-dI-AYH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="32" id="lkz-UC-f2T">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="32" id="lkz-UC-f2T" customClass="ReceiveUITableViewCell" customModule="thesecurechat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lkz-UC-f2T" id="2kv-po-y1R">
