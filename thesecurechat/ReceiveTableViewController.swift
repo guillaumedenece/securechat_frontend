@@ -39,8 +39,11 @@ class ReceiveTableViewController: UITableViewController {
                                         
                                         messages.append(ReceiveMessage.init(from: from_user_id, message: decryptedMessage)!)
                                         
+                                        self.tableView.reloadData()
+                                        
                                         print("decripted message: ", decryptedMessage);
                                         print("from: ", from_user_id);
+                                        
                                     }
                                     catch {
                                         print("Error \(error)")
@@ -60,7 +63,6 @@ class ReceiveTableViewController: UITableViewController {
                 }
             }
             }.resume()
-        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -88,7 +90,7 @@ class ReceiveTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cellIdentifier = "ReceiveTableViewCell"
         
             let cell = (tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReceiveTableViewCell)!
@@ -102,6 +104,7 @@ class ReceiveTableViewController: UITableViewController {
         
         
         return cell
+        
     }
  
 

@@ -186,6 +186,7 @@
                                         </textView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="from" destination="lYv-bf-hmF" id="9Yp-6f-gfv"/>
                                     <outlet property="message" destination="due-fv-Dxf" id="e1S-nf-FRY"/>
