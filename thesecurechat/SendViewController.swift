@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SendViewController.swift
 //  thesecurechat
 //
 //  Created by Nicolas Chevrier on 05/12/2017.
@@ -7,42 +7,64 @@
 //
 
 import UIKit
-var idToken: String? = nil
-var thePrivateKey: SecKey? = nil
-var thePublicKey: SecKey? = nil
 
-class LoginViewController: UIViewController {
-    
+class SendViewController: UIViewController {
+
+    @IBOutlet weak var publickey: UITextField!
     @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
-    
+    @IBOutlet weak var message: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    @IBAction func clickLogin(_ sender: UIButton) {
-        let parameters = ["username": username.text];
-        print("idToken: ", idToken);
+    @IBAction func clickSend(_ sender: UIButton) {
         
-        guard let url = URL(string: "https://thesecurechat.me:3000/authentication/login/first") else { return }
+        // Convert the public key into a SecKey
+        guard let data2 = Data.init(base64Encoded: publickey.text!) else {
+            return
+        }
+        
+        let keyDict:[NSObject:NSObject] = [
+            kSecAttrKeyType: kSecAttrKeyTypeRSA,
+            kSecAttrKeyClass: kSecAttrKeyClassPublic,
+            kSecAttrKeySizeInBits: NSNumber(value: 512),
+            kSecReturnPersistentRef: true as NSObject
+        ]
+        
+        guard let thePublicKey = SecKeyCreateWithData(data2 as CFData, keyDict as CFDictionary, nil) else {
+            return
+        }
+        
+        // Encrypt the message
+        var cipher_text: Data? = nil;
+        
+        do {
+            try cipher_text = encrypter(plain_text: message.text!, public_key: thePublicKey)!
+        }
+        catch {
+            print("Error \(error)")
+        }
+        
+        // Create a JSON
+        /*let parameters = ["username": username.text!, "message": cipher_text!] as [String : Any]
+        
+        guard let url = URL(string: "https://thesecurechat.me:3000/messages/send") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(idtoken, forHTTPHeaderField: "idToken")
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
-            session.finishTasksAndInvalidate();
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -70,75 +92,31 @@ class LoginViewController: UIViewController {
                                 
                                 let session2 = URLSession.shared;
                                 session2.dataTask(with: request2) { (data2, response2, error2) in
-                                    session2.finishTasksAndInvalidate();
                                     if let data2 = data2 {
                                         do {
                                             let json2 = try JSONSerialization.jsonObject(with: data2, options: [])
                                             print("token: ", json2);
-                                            if let ans2 = json2 as? [String: Any] {
-                                                if let newIdToken = ans2["idToken"] as? String {
-                                                    idToken = newIdToken;
-                                                    DispatchQueue.main.async {
-                                                        // Get the private key of the user
-                                                        thePrivateKey = getPrivateKey(username: self.username.text!)
-                                                        
-                                                        // Get the public key
-                                                        thePublicKey = SecKeyCopyPublicKey(thePrivateKey!);
-                                                        self.performSegue(withIdentifier: "loginCheck", sender: self);
-                                                    }
-                                                }
-                                            }
                                         } catch {
-                                            print(error);
+                                            print(error)
                                         }
                                         
                                     }
-                                }.resume()
+                                    }.resume()
                             } else {
-                                print("missing challenge");
+                                print("missing parameters");
                             }
                         } else {
-                            print("missing salt");
+                            print("missing parameters");
                         }} else {
-                             print(json);
-                        }
-                    } catch {
-                        print(error);
+                        print(json);
                     }
+                } catch {
+                    print(error);
                 }
+            }
             }.resume()
-        
-        }
-        
+ */
     }
 
 
-    extension String {
-        
-        func sha256() -> String{
-            if let stringData = self.data(using: String.Encoding.utf8) {
-                return hexStringFromData(input: digest(input: stringData as NSData))
-            }
-            return ""
-        }
-        
-        private func digest(input : NSData) -> NSData {
-            let digestLength = Int(CC_SHA256_DIGEST_LENGTH)
-            var hash = [UInt8](repeating: 0, count: digestLength)
-            CC_SHA256(input.bytes, UInt32(input.length), &hash)
-            return NSData(bytes: hash, length: digestLength)
-        }
-        
-        private  func hexStringFromData(input: NSData) -> String {
-            var bytes = [UInt8](repeating: 0, count: input.length)
-            input.getBytes(&bytes, length: input.length)
-            
-            var hexString = ""
-            for byte in bytes {
-                hexString += String(format:"%02x", UInt8(byte))
-            }
-            
-            return hexString
-        }
-        
 }

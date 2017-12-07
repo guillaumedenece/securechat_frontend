@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18151F9AE5F500B2F62E /* AppDelegate.swift */; };
-		030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18171F9AE5F500B2F62E /* ViewController.swift */; };
+		030B18181F9AE5F500B2F62E /* oldsecurityfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */; };
 		030B181B1F9AE5F500B2F62E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B18191F9AE5F500B2F62E /* Main.storyboard */; };
 		030B181D1F9AE5F500B2F62E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030B181C1F9AE5F500B2F62E /* Assets.xcassets */; };
 		030B18201F9AE5F500B2F62E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */; };
@@ -16,8 +16,12 @@
 		030B18361F9AE5F500B2F62E /* thesecurechatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B18351F9AE5F500B2F62E /* thesecurechatUITests.swift */; };
 		03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */; };
 		03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F701FD69A2300CC1FF3 /* LoginViewController.swift */; };
+		03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */; };
+		03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F741FD7AF4700CC1FF3 /* Security.swift */; };
+		03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */; };
 		0335E8991F9C305300F37304 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0335E8981F9C304800F37304 /* Security.framework */; };
 		4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */; };
+		034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +44,7 @@
 /* Begin PBXFileReference section */
 		030B18121F9AE5F500B2F62E /* thesecurechat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = thesecurechat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		030B18151F9AE5F500B2F62E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		030B18171F9AE5F500B2F62E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldsecurityfile.swift; sourceTree = "<group>"; };
 		030B181A1F9AE5F500B2F62E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		030B181C1F9AE5F500B2F62E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		030B181F1F9AE5F500B2F62E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,7 +57,11 @@
 		030B18371F9AE5F500B2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		03308F701FD69A2300CC1FF3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		03308F741FD7AF4700CC1FF3 /* Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
+		03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshViewController.swift; sourceTree = "<group>"; };
 		0335E8981F9C304800F37304 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		034DA3B41FA00D4E00347EAA /* thesecurechat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thesecurechat-Bridging-Header.h"; sourceTree = "<group>"; };
 		4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,14 +118,18 @@
 			isa = PBXGroup;
 			children = (
 				030B18151F9AE5F500B2F62E /* AppDelegate.swift */,
-				030B18171F9AE5F500B2F62E /* ViewController.swift */,
+				030B18171F9AE5F500B2F62E /* oldsecurityfile.swift */,
+				03308F741FD7AF4700CC1FF3 /* Security.swift */,
+				03308F761FD7D83800CC1FF3 /* RefreshViewController.swift */,
 				03308F6E1FD6629400CC1FF3 /* EntryViewController.swift */,
 				030B18191F9AE5F500B2F62E /* Main.storyboard */,
+				034A3BA51FD8927C00D9AB17 /* ChoiceViewController.swift */,
 				03308F701FD69A2300CC1FF3 /* LoginViewController.swift */,
 				030B181C1F9AE5F500B2F62E /* Assets.xcassets */,
 				030B181E1F9AE5F500B2F62E /* LaunchScreen.storyboard */,
 				030B18211F9AE5F500B2F62E /* Info.plist */,
 				4316AB871FD8C62C00A52C51 /* RegisterViewController.swift */,
+				03308F721FD7AC7B00CC1FF3 /* SendViewController.swift */,
 			);
 			path = thesecurechat;
 			sourceTree = "<group>";
@@ -285,8 +297,13 @@
 				03308F711FD69A2300CC1FF3 /* LoginViewController.swift in Sources */,
 				4316AB881FD8C62C00A52C51 /* RegisterViewController.swift in Sources */,
 				030B18181F9AE5F500B2F62E /* ViewController.swift in Sources */,
+				03308F751FD7AF4700CC1FF3 /* Security.swift in Sources */,
+				030B18181F9AE5F500B2F62E /* oldsecurityfile.swift in Sources */,
 				030B18161F9AE5F500B2F62E /* AppDelegate.swift in Sources */,
+				03308F771FD7D83800CC1FF3 /* RefreshViewController.swift in Sources */,
+				03308F731FD7AC7B00CC1FF3 /* SendViewController.swift in Sources */,
 				03308F6F1FD6629400CC1FF3 /* EntryViewController.swift in Sources */,
+				034A3BA61FD8927C00D9AB17 /* ChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WPB72M7ZKJ;
 				INFOPLIST_FILE = thesecurechat/Info.plist;
@@ -459,6 +477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thesecurechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SWIFT_MODULE_NAME)-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 4.0;
@@ -470,6 +489,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WPB72M7ZKJ;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
@@ -478,6 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thesecurechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SWIFT_MODULE_NAME)-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 4.0;
