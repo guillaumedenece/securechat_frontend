@@ -41,9 +41,9 @@ class SendViewController: UIViewController {
         }
         
         print("before send")
-        /*
+        
         // Create a JSON
-        let parameters = ["to_user_id": username.text!, "message": cipher_text!] as [String : Any]
+        let parameters = ["to_user_id": username.text!, "message": cipher_text?.base64EncodedString()] as [String : Any]
         
         guard let url = URL(string: "https://thesecurechat.me:3000/messages/send") else { return }
         var request = URLRequest(url: url)
@@ -59,6 +59,7 @@ class SendViewController: UIViewController {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let ans = json as? [String: Any] {
+                        print("ans: ", json);
                         if let success = ans["success"] as? String {
                             print("message sent")
                         } else {
@@ -72,7 +73,7 @@ class SendViewController: UIViewController {
                 }
             }
             }.resume()
- */
+ 
     }
 
 
