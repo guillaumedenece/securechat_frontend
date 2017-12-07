@@ -9,8 +9,7 @@
 import UIKit
 
 class SendViewController: UIViewController {
-
-    @IBOutlet weak var publickey: UITextField!
+ 
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var message: UITextField!
     
@@ -28,27 +27,13 @@ class SendViewController: UIViewController {
     @IBAction func clickSend(_ sender: UIButton) {
         
         print("click send")
-        // Convert the public key into a SecKey
-        guard let data2 = Data.init(base64Encoded: publickey.text!) else {
-            return
-        }
-        
-        let keyDict:[NSObject:NSObject] = [
-            kSecAttrKeyType: kSecAttrKeyTypeRSA,
-            kSecAttrKeyClass: kSecAttrKeyClassPublic,
-            kSecAttrKeySizeInBits: NSNumber(value: 512),
-            kSecReturnPersistentRef: true as NSObject
-        ]
-        
-        guard let thePublicKey = SecKeyCreateWithData(data2 as CFData, keyDict as CFDictionary, nil) else {
-            return
-        }
+
         print("before cipher")
         // Encrypt the message
         var cipher_text: Data? = nil;
         
         do {
-            try cipher_text = encrypter(plain_text: message.text!, public_key: thePublicKey)!
+            try cipher_text = encrypter(plain_text: message.text!, public_key: thePublicKey!)!
             print("after cipher")
         }
         catch {
@@ -56,7 +41,7 @@ class SendViewController: UIViewController {
         }
         
         print("before send")
-        
+        /*
         // Create a JSON
         let parameters = ["to_user_id": username.text!, "message": cipher_text!] as [String : Any]
         
@@ -87,7 +72,7 @@ class SendViewController: UIViewController {
                 }
             }
             }.resume()
- 
+ */
     }
 
 

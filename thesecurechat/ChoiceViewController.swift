@@ -10,7 +10,7 @@ import UIKit
 
 class ChoiceViewController: UIViewController {
 
-    @IBOutlet weak var publickey: UITextView!
+    @IBOutlet weak var publickey: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
