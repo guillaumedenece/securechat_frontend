@@ -19,7 +19,7 @@ func generate_privateKey(keytag: String) -> SecKey? {
     let attributes: [String: Any] = [
         kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
         kSecAttrKeySizeInBits as String:      256,
-        //kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave, // Indicate that the generation operation should take place inside the Secure Enclave (doesn't work on simulator)
+        kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave, // Indicate that the generation operation should take place inside the Secure Enclave (doesn't work on simulator)
         kSecPrivateKeyAttrs as String: [
             kSecAttrIsPermanent as String:      true,
             kSecAttrApplicationTag as String:   keytag.data(using: .utf8)!,
