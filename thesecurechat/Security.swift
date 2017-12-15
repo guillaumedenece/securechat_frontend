@@ -6,10 +6,13 @@
 //  Copyright © 2017 Nicolas Chevrier. All rights reserved.
 //
 
-
 import UIKit
 
-// Generate a private key
+/// \brief      Securerly generates a private key
+///
+/// \param      keytag      The tag to identify the key
+///
+/// \return     The private secret key generated
 func generate_privateKey(keytag: String) -> SecKey? {
     let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                  kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
@@ -39,6 +42,11 @@ func generate_privateKey(keytag: String) -> SecKey? {
     return privateKey;
 }
 
+/// \brief      Retrieve a private key previously generated
+///
+/// \param      username        The tag to identify the key
+///
+/// \return     The private secret key
 func getPrivateKey(username: String) -> SecKey? {
     let keytag = "thesecurechatkey" + username
     // Search for an already existing key
@@ -68,7 +76,14 @@ func getPrivateKey(username: String) -> SecKey? {
     return privatekey
 }
 
-
+/// \brief      Encrypt a message
+///
+/// \details    The message is encrypted through AES and is HMAC. The keys used to do that are randomly generated and encrypted through AES thanks to the public_key
+///
+/// \param      plain_text      The message that must be encrypted
+/// \param      public_key      The key to encrypt the message
+///
+/// \return     A JSON pakcet with the cypher text (the encrypted message) and the keys to decrypt it
 func encrypter(plain_text: String, public_key: SecKey) throws -> Data? {
     let key_size: Int = 256/8;
     let block_size = 2048;
@@ -176,7 +191,12 @@ func encrypter(plain_text: String, public_key: SecKey) throws -> Data? {
     return outputJson
 }
 
-
+/// \brief      Decrypt a message
+///
+/// \param      cypher_text     The encrypted message that must be decrypted
+/// \param      private_key     The key to decrypt the message
+///
+/// \return     A JSON pakcet with the cypher text (the encrypted message) and the keys to decrypt it
 func decrypter(cypher_text: Data, private_key: SecKey) throws -> String? {
     
     // Retrieve the Json object
@@ -249,6 +269,12 @@ struct OutputPacket: Codable {
 
 extension String {
     
+    /// \brief      Encrypt a String with AES
+    ///
+    /// \param      key     The key to encrypt the message
+    /// \param      iv      An initialization vector
+    ///
+    /// \return     The encrypted message
     func aesEncrypt(key:String, iv:String, options:Int = kCCOptionPKCS7Padding) -> String? {
         if let keyData = key.data(using: String.Encoding.utf8),
             let data = self.data(using: String.Encoding.utf8),
@@ -288,6 +314,12 @@ extension String {
         return nil
     }
     
+    /// \brief      Decrypt a message encrypted throug AES
+    ///
+    /// \param      key     The key to decrypt the message
+    /// \param      iv      The initialization vector used to encrypt
+    ///
+    /// \return     The decrypted message
     func aesDecrypt(key:String, iv:String, options:Int = kCCOptionPKCS7Padding) -> String? {
         if let keyData = key.data(using: String.Encoding.utf8),
             let data = NSData(base64Encoded: self, options: .ignoreUnknownCharacters),
@@ -326,6 +358,11 @@ extension String {
         return nil
     }
     
+    /// \brief      HMAC a message
+    ///
+    /// \param      key     The key to HMAC the message
+    ///
+    /// \return     The tag generated
     func hmac(key: String) -> String {
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = Int(self.lengthOfBytes(using: String.Encoding.utf8))
